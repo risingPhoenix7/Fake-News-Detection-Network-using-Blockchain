@@ -54,9 +54,3 @@ def upload_file():
                     
         else:
             st.success("File successfully uploaded.")
-
-        # GO TO PREVIOUS SCREEN
-        # if st.button("Back"):
-        #     # Set the previous screen in the session state
-        #     with st.spinner("Please Wait"): 
-        #         change_screen_.change_screen("main_page")

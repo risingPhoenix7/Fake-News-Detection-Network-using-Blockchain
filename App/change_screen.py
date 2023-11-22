@@ -120,6 +120,9 @@ view_sent_news_message = """
             - Know if the transaction has been confirmed by the network's auditors
             
             """
+            
+
+    
 
 view_account_info_message = """
             ## ACCOUNT INFORMATION

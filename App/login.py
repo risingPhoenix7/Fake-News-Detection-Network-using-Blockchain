@@ -18,12 +18,12 @@ def login():
         
         #IF PRIVATE KEY ENTERED
         if user_input:
-            with st.spinner("Please Wait"):
+            with st.spinner("Verifying Key"):
                 vc = crypto_logic.verify(user_input)
 
             if vc[0]:
                 # st.markdown(f'<span style="color:green"><b><i>{vc[1]}</b></i></span>', unsafe_allow_html=True)
-                with st.spinner("Please Wait"):
+                with st.spinner("Initialising Your Account"):
                     initialise(vc[2])
                     change_screen_.change_screen("main_page")
 

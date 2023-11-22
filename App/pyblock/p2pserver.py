@@ -162,6 +162,7 @@ class P2pServer:
         responses = []
         encrypted_message = self.get_encrypted_message(message)
         print(f"Peers: {self.peers}")
+        
         for (clientPort, data) in self.peers.copy().items():
             if (clientPort != self.myClientPort):
                 responses.append(self.private_send_message(
@@ -267,9 +268,12 @@ class P2pServer:
 
             self.transaction_pool = TransactionPool.from_json(
                 data["transaction_pool"])
+            
             print("REPLACED TRANSACTION POOL")
             print(self.transaction_pool)
-
+            
+            self.block_proposer = data["block_proposer"]
+            print("UPDATED BLOCK PROPOSER: ", self.block_proposer)
             # SET INITIALISED TO TRUE AND ALLOW USER TO GO TO MAIN PAGE
             if not self.initialised:
                 self.initialised = True
@@ -288,8 +292,7 @@ class P2pServer:
             # CHECK BLOCK IS PROPOSED BY CURRENT BLOCK PROPOSER
             block = Block.from_json(data["block"])
 
-            print(block.transactions)
-            if self.block_proposer != block.validator:
+            if self.block_proposer and self.block_proposer != block.validator:
                 print("RECEIVED BLOCK DOESN'T HAVE CORRECT VALIDATOR!")
                 return
 
@@ -334,7 +337,8 @@ class P2pServer:
 
     def handle_votes(self, data):
         # CHECK IF THE VOTE IS VALID [FROM AN ACTIVE VALIDATOR]
-        if not self.accounts.accounts[data["address"]].isActive or not self.accounts.accounts[data["address"]].isValidator:
+        if (not self.accounts.accounts[data["address"]].isActive or 
+            not self.accounts.accounts[data["address"]].isValidator):
             print("INVALID VOTE")
             return
 
@@ -406,12 +410,9 @@ class P2pServer:
             "type": MESSAGE_TYPE["chain"],
             "chain": chain_as_json,
             "accounts": self.accounts.to_json(),
-            "transaction_pool": self.transaction_pool.to_json()
+            "transaction_pool": self.transaction_pool.to_json(),
+            "address": self.block_proposer
         }
-        print(message["transaction_pool"])
-        # also print its type
-        print("\n \n type of transaction pool")
-        print(type(message["transaction_pool"]))
         self.send_direct_encrypted_message(
             message=message, clientPort=clientPort)
 
@@ -458,15 +459,8 @@ class P2pServer:
     def endserver(self):
         self.heartbeat_manager.stop()
         self.heartbeat_manager = None
-        self.peers = {}
-        self.myClientPort = 0
         self.block_proposer = None
         self.block_received = None
         self.received_block = None
-        self.blockchain = Blockchain()
-        self.transaction_pool = TransactionPool()
-        self.wallet = Wallet(
-            private_key=None, name=None, email=None
-        )
         self.context.destroy()
         self.accounts = Accounts()
