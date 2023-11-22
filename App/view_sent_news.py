@@ -44,7 +44,7 @@ def view_sent_news():
                 if status_pool:
                     transaction_data["Status"] = "Unconfirmed"
                     
-                else:
+                else:  
                     transaction_data["Status"] = "Added to Blockchain Network"
                     
                     chain = st.session_state.p2pserver.blockchain.chain
