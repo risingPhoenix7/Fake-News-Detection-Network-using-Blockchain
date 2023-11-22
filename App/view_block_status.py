@@ -11,6 +11,7 @@ def block_valid():
 
 #CREATE A NEW BLOCK
 def propose_block():
+    
     if st.session_state.screen == "propose_block":
         navigation_options = change_screen_.navigation_options.get(st.session_state.user_type, ())
         st.markdown(
@@ -116,11 +117,14 @@ def view_block_status():
         change_screen_.change_screen_navbar(selected_option)
               
     
-    if st.session_state.screen == "view_block_status":        
+    if st.session_state.screen == "view_block_status":  
+              
         st.title("View Current Block Status")
         
         if st.session_state.p2pserver.block_proposer == st.session_state.wallet.get_public_key():
+            
             with st.spinner("Please Wait"):
+                st.balloons()
                 change_screen_.change_screen("propose_block")
 
         
