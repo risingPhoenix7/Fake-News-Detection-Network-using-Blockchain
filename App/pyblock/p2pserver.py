@@ -147,7 +147,7 @@ class P2pServer:
         print("Creating new thread since heartbeat manager has run once")
         thread = threading.Thread(target=self.broadcast_new_node)
         thread.start()
-
+        
         print("New thread started")
         while True:
             message = zmq_socket.recv_string()
