@@ -30,7 +30,7 @@ def propose_block():
         )
         
         if st.session_state.p2pserver.received_block:
-            st.write("You have already transmitted the block")
+            st.warning("You have already transmitted the block")
             st.write("Current Confirmations on Block: ", len(
                 st.session_state.p2pserver.received_block.votes))
         
@@ -98,7 +98,7 @@ def propose_block():
                     block.votes.add(st.session_state.wallet.get_public_key())
 
                     # BROADCAST THE BLOCK
-                    with st.spinner("Please Wait.."):
+                    with st.spinner("Broadcasting Block.."):
                         st.session_state.p2pserver.broadcast_block(block)
 
                     # CONFIRMATION MESSAGE
