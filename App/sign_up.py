@@ -38,9 +38,19 @@ def sign_up_generate():
             # INITIALISE ACCOUNT & WALLET OF SESSION
         if st.session_state.gen_key_pressed:
             if st.button("Go to main"):
-                with st.spinner("Please Wait"):
+                
+                with st.spinner("Initialising Server"):
                     initialise(st.session_state.private_key)
-                    change_screen_.change_screen("main_page")
+                    while not st.session_state.p2pserver.initialised:
+                        pass
+                
+                    st.write("Server Initialised. Waiting for connections..")
+                progress_bar = st.progress(0)
+                for i in range(1, 101): 
+                    time.sleep(0.02)  
+                    progress_bar.progress(i)
+                    
+                change_screen_.change_screen("main_page")
                 st.session_state.gen_key_pressed = False
 
         if st.button("Back"):
