@@ -48,6 +48,7 @@ class P2pServer:
         self.myClientPort = 0
         self.context = zmq.Context()
         self.heartbeat_manager = None
+        self.exited_flag = False
 
         # IF THE P2PSERVER HAS RECEIVED CURRENT TRANSACTION POOL & CHAIN ETC.
         self.initialised = False
