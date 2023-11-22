@@ -13,18 +13,16 @@ class Blockchain:
 
     # CHECK IF THE RECEIVED CHAIN IS VALID
     def is_valid_chain(self, chain):
-        print("Checking validity")
-        print(str(chain[0]))
-        # COMMON GENSIS BLOCK
-
-
+        if (chain[0]) != (Block.genesis()).to_json():
+            print("Block not genesis")
+            print(f"Genesis is {Block.genesis().to_json()}")
+            return False
         # FOR EVERY OTHER BLOCK
         for i in range(1, len(chain)):
             # CURRENT BLOCK
             block = chain[i]
             # PREVIOUS BLOCK
             last_block = chain[i - 1]
-
             # VERIFY BLOCK AND PREVIOUS BLOCK HASH
             if not Block.verify_block(block) or not Block.block_hash(last_block) != block.lastHash:
                 print("Failed verification")
@@ -34,6 +32,7 @@ class Blockchain:
 
     # REPLACE THE CHAIN WITH RECEIVED CHAIN
     def replace_chain(self, new_chain):
+        new_chain = [block.from_json() for block in new_chain]
         # IF SMALLER CHAIN; NEVER REPLACE
         if len(new_chain) < len(self.chain):
             print("Received chain is not longer than the current chain")

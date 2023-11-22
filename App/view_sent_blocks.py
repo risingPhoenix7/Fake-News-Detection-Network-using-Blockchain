@@ -22,7 +22,7 @@ def view_sent_blocks():
         ].sent_blocks
         
         if len(blocks) == 0:
-            st.write("You haven't broadcasted any blocks.")
+            st.warning("You haven't broadcasted any blocks.")
         
         else:
             table_data = []
