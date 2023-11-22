@@ -48,8 +48,8 @@ class P2pServer:
         self.myClientPort = 0
         self.context = zmq.Context()
         self.heartbeat_manager = None
-        
-        #IF THE P2PSERVER HAS RECEIVED CURRENT TRANSACTION POOL & CHAIN ETC.
+
+        # IF THE P2PSERVER HAS RECEIVED CURRENT TRANSACTION POOL & CHAIN ETC.
         self.initialised = False
 
     def private_send_message(self, clientPort, message):
@@ -146,11 +146,11 @@ class P2pServer:
             time.sleep(0.5)
         print("Creating new thread since heartbeat manager has run once")
         thread = threading.Thread(target=self.broadcast_new_node)
-        thread.start() 
+        thread.start()
 
         self.initialised = True
         print("New thread started")
-        
+
         while True:
             message = zmq_socket.recv_string()
             zmq_socket.send_string(
@@ -251,25 +251,25 @@ class P2pServer:
         # IF BLOCKCAIN RECIEVED
         if data["type"] == MESSAGE_TYPE["chain"]:
             # TRY TO REPLACE IF LONGER CHAIN
-            
+
             ret = self.blockchain.replace_chain(data["chain"])
-            
+
             # IF NOT THE LONGEST CHAIN; DONT REPLACE ANYTHING ELSE AS THIS NODE'S DATA IS CLEARLY OUTDATED
             if not ret:
                 return
-            
+
             print("REPLACED CHAIN")
-            
+
             self.accounts.from_json(json_data=data["accounts"])
             print("REPLACED ACCOUNTS")
-            
+
             print(self.accounts.to_json())
-            
+
             self.transaction_pool = TransactionPool.from_json(
                 data["transaction_pool"])
             print("REPLACED TRANSACTION POOL")
             print(self.transaction_pool)
-            
+
             # SET INITIALISED TO TRUE AND ALLOW USER TO GO TO MAIN PAGE
             if not self.initialised:
                 self.initialised = True
@@ -321,10 +321,9 @@ class P2pServer:
             self.heartbeat_manager.addToClients(clientPort, data["public_key"])
             self.accounts.addANewClient(
                 address=data["public_key"], clientPort=clientPort, userType=self.user_type)
-            
+
             if (clientPort != self.myClientPort):
                 self.send_chain(clientPort)
-
 
         elif data["type"] == MESSAGE_TYPE["vote"]:
             self.handle_votes(data)
@@ -361,7 +360,7 @@ class P2pServer:
 
         # JUST IN CASE OF PASS BY VALUE
         for index, transaction in enumerate(self.received_block.transactions):
-            self.received_block.transactions[index] = self.trasaction_dict[transaction.id]
+            self.received_block.transactions[index] = transactions_dict[transaction.id]
 
     def broadcast_new_validator(self, stake):
         """
