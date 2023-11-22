@@ -13,9 +13,10 @@ class Blockchain:
 
     # CHECK IF THE RECEIVED CHAIN IS VALID
     def is_valid_chain(self, chain):
+        print("Checking validity")
+        print(str(chain[0]))
         # COMMON GENSIS BLOCK
-        if str(chain[0]) != str(Block.genesis()):
-            return False
+
 
         # FOR EVERY OTHER BLOCK
         for i in range(1, len(chain)):
@@ -26,6 +27,7 @@ class Blockchain:
 
             # VERIFY BLOCK AND PREVIOUS BLOCK HASH
             if not Block.verify_block(block) or not Block.block_hash(last_block) != block.lastHash:
+                print("Failed verification")
                 return False
 
         return True
