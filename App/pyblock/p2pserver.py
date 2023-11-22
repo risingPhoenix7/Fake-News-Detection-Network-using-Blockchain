@@ -111,6 +111,11 @@ class P2pServer:
 
     def start_server(self):
         while True:
+            if self.exited_flag:
+                self.endserver()
+                break
+            
+
             port = random.randint(50000, 65533)
             if self.is_port_available(port) and self.is_port_available(port+1):
                 try:
@@ -204,12 +209,12 @@ class P2pServer:
             logging.error(f"Failed to fetch peers: {e}")
             print('Failed to fetch peers')
 
-    def listen(self):
-        print("Starting tcp server...")
-        server_thread = threading.Thread(
-            target=self.start_server, daemon=True)
-        server_thread.start()
-        print("Server thread started")
+    # def listen(self):
+    #     print("Starting tcp server...")
+    #     server_thread = threading.Thread(
+    #         target=self.start_server, daemon=True)
+    #     server_thread.start()
+    #     print("Server thread started")
 
     def send_current_block_proposer(self, clientPort):
         message = {
