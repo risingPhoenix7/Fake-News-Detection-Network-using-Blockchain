@@ -25,7 +25,7 @@ def sign_up_generate():
         if st.button("Generate a new Private Key"):
             st.session_state.gen_key_pressed = True
             
-            with st.spinner("Please Wait.."):
+            with st.spinner("Generating Key"):
                 st.session_state.private_key = crypto_logic.gen_sk()
             st.success("Generated Private key. Please store it safely.")
 
@@ -57,7 +57,6 @@ def sign_up_generate():
             with st.spinner("Please Wait"): 
                 change_screen_.change_screen("sign_up")
                 
-        change_screen_.add_space()
 
 def sign_up():
     if st.session_state.screen == "sign_up":
