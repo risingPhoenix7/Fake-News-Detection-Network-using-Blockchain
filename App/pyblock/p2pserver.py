@@ -331,10 +331,6 @@ class P2pServer:
         elif data["type"] == MESSAGE_TYPE["vote"]:
             self.handle_votes(data)
 
-        elif data["type"] == MESSAGE_TYPE["block_proposer_address"]:
-            # SET THE CURRENT BLOCK PROPOSER ACC. TO MESSAGE
-            self.block_proposer = data["address"]
-
     def handle_votes(self, data):
         # CHECK IF THE VOTE IS VALID [FROM AN ACTIVE VALIDATOR]
         if (not self.accounts.accounts[data["address"]].isActive or 
@@ -411,7 +407,7 @@ class P2pServer:
             "chain": chain_as_json,
             "accounts": self.accounts.to_json(),
             "transaction_pool": self.transaction_pool.to_json(),
-            "address": self.block_proposer
+            "block_proposer": self.block_proposer
         }
         self.send_direct_encrypted_message(
             message=message, clientPort=clientPort)
