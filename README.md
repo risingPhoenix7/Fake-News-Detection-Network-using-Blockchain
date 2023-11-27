@@ -5,8 +5,9 @@
 This project develops a blockchain-based network for detecting fake news, leveraging NLP bases ML models and a consortium of auditors. The system operates on a consortium blockchain, enabling anonymous participation for readers to access news and submit nkews items as transactions.
 
 <p align="center">
-    <img src="FLOWCHART IMAGES/ENTER NETWORK-1.jpeg" alt="Alt text" height="400" width="400">
+    <img src="Flowchart%20Images/ENTER%20NETWORK-1.jpeg" alt="Alt text" height="400" width="400">
 </p>
+
 ## Running the Project
 
 #### _Ensure your internet is working_ before proceeding
@@ -48,7 +49,7 @@ This project develops a blockchain-based network for detecting fake news, levera
 9. To upload a file, go to upload file page and upload a text file, attaching a transaction fee.
 
 <p align="center">
-    <img src="FLOWCHART IMAGES/UPLOAD NEWS.jpeg" alt="Alt text" height="400" width="400">
+    <img src="Flowchart%20Images/UPLOAD NEWS.jpeg" alt="Alt text" height="400" width="400">
 </p>
 
 
@@ -59,7 +60,7 @@ This project develops a blockchain-based network for detecting fake news, levera
 12. If you are chosen as the block proposer, you'll be shown the transactions in mempool on the VIEW BLOCK STATUS page to vote on them as "fake" news or not while showing the sender reputation, ML model score etc.
 
 <p align="center">
-    <img src="FLOWCHART IMAGES/CREATE BLOCK.jpeg" alt="Alt text" height="400" width="400">
+    <img src="Flowchart%20Images/CREATE BLOCK.jpeg" alt="Alt text" height="400" width="400">
 </p>
 
 
@@ -71,7 +72,7 @@ This project develops a blockchain-based network for detecting fake news, levera
 
 
 <p align="center">
-    <img src="FLOWCHART IMAGES/VIEW BLOCK STATUS.jpeg" alt="Alt text" height="400" width="400">
+    <img src="Flowchart%20Images/VIEW BLOCK STATUS.jpeg" alt="Alt text" height="400" width="400">
 </p>
 
 
@@ -86,7 +87,7 @@ This project develops a blockchain-based network for detecting fake news, levera
 
 
 <p align="center">
-    <img src="FLOWCHART IMAGES/VOTING BLOCK.jpeg" alt="Alt text" height="400" width="400">
+    <img src="Flowchart%20Images/VOTING BLOCK.jpeg" alt="Alt text" height="400" width="400">
 </p>
 
 
